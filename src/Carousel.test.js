@@ -46,6 +46,14 @@ it("works when you click on the right arrow", function() {
   // expect the second image to show, but not the first
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).not.toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).toBeInTheDocument();
+  
+  // click past the last image
+  fireEvent.click(rightArrow);
+  fireEvent.click(rightArrow);
+
+  // expect the first image to show, but not the last
+  expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
+  expect(queryByAltText("Photo by Josh Post on Unsplash")).not.toBeInTheDocument();
 });
 
 it("works when you click on the left arrow", function() {
