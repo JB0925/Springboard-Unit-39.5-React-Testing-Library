@@ -59,7 +59,7 @@ it("works when you click on the left arrow", function() {
   const leftArrow = queryByTestId("left-arrow");
   fireEvent.click(leftArrow);
 
-  // expect the second image to show, but not the first
+  // expect the last image to show, but not the first
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).not.toBeInTheDocument();
   expect(queryByAltText("Photo by Josh Post on Unsplash")).toBeInTheDocument();
 });
