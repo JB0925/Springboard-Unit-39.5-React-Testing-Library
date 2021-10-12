@@ -9,7 +9,20 @@ function Carousel(props) {
   const [cardIdx, setCardIdx] = useState(0);
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
-  const goForward = () => setCardIdx(cardIdx + 1);
+
+  // I rewrote this function to satisfy requirement 3 and 4 of Unit 39.5
+  // though it is a little bit different, I believe it handles the situation 
+  // more elegantly and the test I wrote for it passes.
+  const changePictureSrc = (evt) => {
+    const deckLength = props.cardData.length;
+
+    if (evt.target.id === "left-arrow") {
+      cardIdx === 0 ? setCardIdx(deckLength - 1) : setCardIdx(cardIdx - 1);
+      return;
+    };
+
+    cardIdx === deckLength - 1 ? setCardIdx(0) : setCardIdx(cardIdx + 1);
+  };
 
   return (
     <div className="Carousel">
@@ -17,8 +30,9 @@ function Carousel(props) {
       <div className="Carousel-main">
         <i
           className="fas fa-chevron-circle-left fa-2x"
-          onClick={goForward}
+          onClick={changePictureSrc}
           data-testid="left-arrow"
+          id="left-arrow"
         />
         <Card
           caption={card.caption}
@@ -28,8 +42,9 @@ function Carousel(props) {
         />
         <i
           className="fas fa-chevron-circle-right fa-2x"
-          onClick={goForward}
+          onClick={changePictureSrc}
           data-testid="right-arrow"
+          id="right-arrow"
         />
       </div>
     </div>
